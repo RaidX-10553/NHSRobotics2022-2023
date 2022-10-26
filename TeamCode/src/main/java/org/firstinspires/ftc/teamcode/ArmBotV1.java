@@ -43,7 +43,6 @@ public class ArmBotV1 extends LinearOpMode {
 
 
         waitForStart();
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         while (opModeIsActive()) {
@@ -78,21 +77,21 @@ public class ArmBotV1 extends LinearOpMode {
 
 
 
-
-            armMotor.setPower(gamepad2.left_stick_x);
+            double x = -gamepad2.left_stick_y;
+            armMotor.setPower(x);
 
 
 
             //Range is between [0.0 and 1.0] 0.5 being the center??
             if (gamepad2.left_bumper) {
-                claw1.setPosition(0);
-                claw2.setPosition(0);
+                claw1.setPosition(0.5);
+                claw2.setPosition(0.5);
 
             }
 
             if (gamepad2.right_bumper) {
                 claw1.setPosition(1);
-                claw2.setPosition(1);
+                claw2.setPosition(0);
 
             }
 
