@@ -43,8 +43,10 @@ public class ArmBotV1 extends LinearOpMode {
 
 
         waitForStart();
+        //Setting ZeroPowerBehavior, should stop motor from rotating when not powered.
+        armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-
+        //Code is looped inside this while loop
         while (opModeIsActive()) {
 
             //Slow Driving
@@ -69,6 +71,7 @@ public class ArmBotV1 extends LinearOpMode {
             }
 
 
+            //Drive Code Using RR
             mecanumDrive.setDrivePower(
                     new Pose2d(gamepad1.left_stick_y * driveValue,
                             -gamepad1.right_stick_x * driveValue,
@@ -77,12 +80,14 @@ public class ArmBotV1 extends LinearOpMode {
 
 
 
+            //Arm Control
             double x = -gamepad2.left_stick_y;
             armMotor.setPower(x);
 
 
 
-            //Range is between [0.0 and 1.0] 0.5 being the center??
+            //Range is between [0.0 and 1.0] 0.5 being the center
+            //This works
             if (gamepad2.left_bumper) {
                 claw1.setPosition(0.5);
                 claw2.setPosition(0.5);
