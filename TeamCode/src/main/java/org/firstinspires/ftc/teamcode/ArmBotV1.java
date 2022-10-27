@@ -82,7 +82,7 @@ public class ArmBotV1 extends LinearOpMode {
 
             //Arm Control
             double x = -gamepad2.left_stick_y;
-            armMotor.setPower(x);
+            armMotor.setPower(x/0.6);
 
 
 
