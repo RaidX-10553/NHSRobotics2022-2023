@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2021 OpenFTC Team
  *
@@ -19,10 +20,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.subsystems;
-
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+package org.firstinspires.ftc.teamcode.subystems;
 
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;
@@ -40,32 +38,8 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
 
-@Disabled
-public class AprilTagDetectionPipeline extends OpenCvPipeline
+class AprilTagDetectionPipeline extends OpenCvPipeline
 {
-    // STATIC CONSTANTS
-
-    public static Scalar blue = new Scalar(7,197,235,255);
-    public static Scalar red = new Scalar(255,0,0,255);
-    public static Scalar green = new Scalar(0,255,0,255);
-    public static Scalar white = new Scalar(255,255,255,255);
-
-    static final double FEET_PER_METER = 3.28084;
-
-    // Lens intrinsics
-    // UNITS ARE PIXELS
-    // NOTE: this calibration is for the C920 webcam at 800x448.
-    // You will need to do your own calibration for other configurations!
-    public static double fx = 578.272;
-    public static double fy = 578.272;
-    public static double cx = 402.145;
-    public static double cy = 221.506;
-
-    // UNITS ARE METERS
-    public static double TAG_SIZE = 0.166;
-
-    // instance variables
-
     private long nativeApriltagPtr;
     private Mat grey = new Mat();
     private ArrayList<AprilTagDetection> detections = new ArrayList<>();
@@ -75,20 +49,37 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
 
     Mat cameraMatrix;
 
-    double tagsizeX = TAG_SIZE;
-    double tagsizeY = TAG_SIZE;
+    Scalar blue = new Scalar(7,197,235,255);
+    Scalar red = new Scalar(255,0,0,255);
+    Scalar green = new Scalar(0,255,0,255);
+    Scalar white = new Scalar(255,255,255,255);
+
+    double fx;
+    double fy;
+    double cx;
+    double cy;
+
+    // UNITS ARE METERS
+    double tagsize;
+    double tagsizeX;
+    double tagsizeY;
 
     private float decimation;
     private boolean needToSetDecimation;
     private final Object decimationSync = new Object();
 
-    public AprilTagDetectionPipeline() {
-        constructMatrix();
-    }
-
-    @Override
-    public void init(Mat frame)
+    public AprilTagDetectionPipeline(double tagsize, double fx, double fy, double cx, double cy)
     {
+        this.tagsize = tagsize;
+        this.tagsizeX = tagsize;
+        this.tagsizeY = tagsize;
+        this.fx = fx;
+        this.fy = fy;
+        this.cx = cx;
+        this.cy = cy;
+
+        constructMatrix();
+
         // Allocate a native context object. See the corresponding deletion in the finalizer
         nativeApriltagPtr = AprilTagDetectorJNI.createApriltagDetector(AprilTagDetectorJNI.TagFamily.TAG_36h11.string, 3, 3);
     }
@@ -96,8 +87,17 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
     @Override
     public void finalize()
     {
-        // Delete the native context we created in the init() function
-        AprilTagDetectorJNI.releaseApriltagDetector(nativeApriltagPtr);
+        // Might be null if createApriltagDetector() threw an exception
+        if(nativeApriltagPtr != 0)
+        {
+            // Delete the native context we created in the constructor
+            AprilTagDetectorJNI.releaseApriltagDetector(nativeApriltagPtr);
+            nativeApriltagPtr = 0;
+        }
+        else
+        {
+            System.out.println("AprilTagDetectionPipeline.finalize(): nativeApriltagPtr was NULL");
+        }
     }
 
     @Override
@@ -116,7 +116,7 @@ public class AprilTagDetectionPipeline extends OpenCvPipeline
         }
 
         // Run AprilTag
-        detections = AprilTagDetectorJNI.runAprilTagDetectorSimple(nativeApriltagPtr, grey, TAG_SIZE, fx, fy, cx, cy);
+        detections = AprilTagDetectorJNI.runAprilTagDetectorSimple(nativeApriltagPtr, grey, tagsize, fx, fy, cx, cy);
 
         synchronized (detectionsUpdateSync)
         {
