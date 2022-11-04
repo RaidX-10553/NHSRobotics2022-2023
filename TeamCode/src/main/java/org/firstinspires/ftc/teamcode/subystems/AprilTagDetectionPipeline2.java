@@ -38,7 +38,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
 
-class AprilTagDetectionPipeline extends OpenCvPipeline
+class AprilTagDetectionPipeline2 extends OpenCvPipeline
 {
     private long nativeApriltagPtr;
     private Mat grey = new Mat();
