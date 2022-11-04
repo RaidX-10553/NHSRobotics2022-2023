@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package org.firstinspires.ftc.teamcode.subystems;
+package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -29,7 +29,6 @@ import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
@@ -37,7 +36,7 @@ import java.util.ArrayList;
 public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
 {
     OpenCvCamera camera;
-    AprilTagDetectionPipeline aprilTagDetectionPipeline;
+    AprilTagDetectionPipeline2 aprilTagDetectionPipeline2;
 
     static final double FEET_PER_METER = 3.28084;
 
@@ -70,9 +69,9 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
     {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
+        aprilTagDetectionPipeline2 = new AprilTagDetectionPipeline2(tagsize, fx, fy, cx, cy);
 
-        camera.setPipeline(aprilTagDetectionPipeline);
+        camera.setPipeline(aprilTagDetectionPipeline2);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
@@ -97,7 +96,7 @@ public class AprilTagAutonomousInitDetectionExample extends LinearOpMode
          */
         while (!isStarted() && !isStopRequested())
         {
-            ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
+            ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline2.getLatestDetections();
 
             if(currentDetections.size() != 0)
             {

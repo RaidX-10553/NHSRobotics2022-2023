@@ -2,13 +2,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.subsystems.ParkingZone;
 import org.firstinspires.ftc.teamcode.subsystems.MarkerDetection;
@@ -67,16 +63,16 @@ public class BlueLeftAuto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
         //flipping
-        TrajectorySequence location1 = driveTrain.trajectorySequenceBuilder(startPose)
+        TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
                 .strafeLeft(32)
                 .forward(32)
                 .build();
 
-        TrajectorySequence location2 = driveTrain.trajectorySequenceBuilder(startPose)
+        TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
                 .forward(32)
                 .build();
 
-        TrajectorySequence location3 = driveTrain.trajectorySequenceBuilder(startPose)
+        TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
                 .strafeRight(30)
                 .forward(32)
                 .build();
@@ -132,7 +128,7 @@ public class BlueLeftAuto extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            if (started = true) {
+            if (started) {
 
                 webcam.stopStreaming();
 
