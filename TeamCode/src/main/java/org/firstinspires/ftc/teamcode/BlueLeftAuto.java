@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.subsystems.AprilTagLocation;
-import org.firstinspires.ftc.teamcode.subsystems.MarkerDetectionPipeline;
+import org.firstinspires.ftc.teamcode.subsystems.ParkingZone;
+import org.firstinspires.ftc.teamcode.subsystems.MarkerDetection;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
