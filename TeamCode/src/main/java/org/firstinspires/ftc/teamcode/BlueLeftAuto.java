@@ -128,7 +128,7 @@ public class BlueLeftAuto extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            if (started) {
+            if (started == true) {
 
                 webcam.stopStreaming();
 
