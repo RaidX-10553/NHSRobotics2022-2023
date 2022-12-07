@@ -74,7 +74,7 @@ public class ArmBotV1 extends LinearOpMode {
             //Drive Code Using RR
             mecanumDrive.setDrivePower(
                     new Pose2d(gamepad1.left_stick_y * driveValue,
-                            -gamepad1.right_stick_x * driveValue,
+                            gamepad1.right_stick_x * driveValue,
                             gamepad1.left_stick_x *driveValue));
             mecanumDrive.updatePoseEstimate();
 
