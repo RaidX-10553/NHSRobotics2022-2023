@@ -3,8 +3,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.subsystems.ParkingZone;
 import org.firstinspires.ftc.teamcode.subsystems.MarkerDetection;
@@ -18,6 +21,8 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.easyopencv.OpenCvWebcam;
 
+import org.firstinspires.ftc.teamcode.subsystems.Arm;
+
 
 @Autonomous(name="BlueLeftAuto2", group="Autonomous")
 public class BlueLeftAuto extends LinearOpMode {
@@ -29,6 +34,12 @@ public class BlueLeftAuto extends LinearOpMode {
     MarkerDetection pipeline;
 
     boolean started = false;
+
+    Servo claw1;
+    Servo claw2;
+
+    DcMotorEx armMotor;
+    Arm arm;
 
     @Override
     public void runOpMode() {
@@ -58,23 +69,106 @@ public class BlueLeftAuto extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
+        claw1 = hardwareMap.get(Servo.class, "claw1");
+        claw2 = hardwareMap.get(Servo.class, "claw2");
 
-        Pose2d startPose = new Pose2d(36, 61, Math.toRadians(-90));
+        armMotor = hardwareMap.get(DcMotorEx.class, "arm");
+        arm = new Arm(armMotor);
+
+        armMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
+        Pose2d startPose = new Pose2d(35.25, 64, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
 
         //flipping
         TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
-                .strafeLeft(32)
-                .forward(32)
+                .addTemporalMarker(0, () -> {
+                    //claw close
+                    claw1.setPosition(0.5);
+                    claw2.setPosition(0.5);
+                })
+                .strafeRight(23.5)
+                .lineTo(new Vector2d(11.75, 35.25))
+                .turn(Math.toRadians(45))
+                .addDisplacementMarker(() -> {
+                    //Arm raises
+                    arm.Raise();
+                })
+                .waitSeconds(3)
+                //change 1 to appropriate distance based on tuning
+                .forward(3)
+                .addDisplacementMarker(() -> {
+                    //Claw Opens
+                    claw1.setPosition(1);
+                    claw2.setPosition(0);
+                })
+                .back(3)
+                .turn(Math.toRadians(-45))
+                .forward(10)
+                .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
+                .turn(Math.toRadians(90))
+                //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
+                .strafeRight(23.5)
                 .build();
 
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
-                .forward(32)
+                .addTemporalMarker(0, () -> {
+                    //claw close
+                    claw1.setPosition(0.5);
+                    claw2.setPosition(0.5);
+                })
+                .strafeRight(23.5)
+                .lineTo(new Vector2d(11.75, 35.25))
+                .turn(Math.toRadians(45))
+                .addDisplacementMarker(() -> {
+                    //Arm raises
+                    arm.Raise();
+                })
+                .waitSeconds(3)
+                //change 1 to appropriate distance based on tuning
+                .forward(3)
+                .addDisplacementMarker(() -> {
+                    //Claw Opens
+                    claw1.setPosition(1);
+                    claw2.setPosition(0);
+                })
+                .back(3)
+                .turn(Math.toRadians(-45))
+                .forward(10)
+                .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
+                .turn(Math.toRadians(90))
+                //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
+
                 .build();
 
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
-                .strafeRight(30)
-                .forward(32)
+                .addTemporalMarker(0, () -> {
+                    //claw close
+                    claw1.setPosition(0.5);
+                    claw2.setPosition(0.5);
+                })
+                .strafeRight(23.5)
+                .lineTo(new Vector2d(11.75, 35.25))
+                .turn(Math.toRadians(45))
+                .addDisplacementMarker(() -> {
+                    //Arm raises
+                    arm.Raise();
+                })
+                .waitSeconds(3)
+                //change forw/back val to appropriate distance based on tuning
+                .forward(3)
+                .addDisplacementMarker(() -> {
+                    //Claw Opens
+                    claw1.setPosition(1);
+                    claw2.setPosition(0);
+                })
+                .back(3)
+                .turn(Math.toRadians(-45))
+                .forward(10)
+                .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
+                .turn(Math.toRadians(90))
+                //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
+                .strafeLeft(23.5)
                 .build();
 
 
