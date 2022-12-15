@@ -90,9 +90,9 @@ public class BlueLeftAuto extends LinearOpMode {
                     //Arm raises
                     arm.Raise();
                 })
-                .waitSeconds(3)
                 //change 1 to appropriate distance based on tuning
                 .forward(3)
+                .waitSeconds(2)
                 .addDisplacementMarker(() -> {
                     //Claw Opens
                     claw1.setPosition(1);
@@ -110,25 +110,25 @@ public class BlueLeftAuto extends LinearOpMode {
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
                 .addTemporalMarker(0, () -> {
                     //claw close
-                    claw1.setPosition(0.5);
-                    claw2.setPosition(0.5);
+
                 })
                 .strafeRight(23.5)
                 .lineTo(new Vector2d(11.75, 35.25))
                 .turn(Math.toRadians(45))
-                .addDisplacementMarker(() -> {
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
-                .waitSeconds(3)
+
                 //change 1 to appropriate distance based on tuning
-                .forward(3)
+
+
                 .addDisplacementMarker(() -> {
                     //Claw Opens
                     claw1.setPosition(1);
                     claw2.setPosition(0);
                 })
-                .back(3)
+
                 .turn(Math.toRadians(-45))
                 .forward(10)
                 .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
@@ -140,8 +140,7 @@ public class BlueLeftAuto extends LinearOpMode {
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
                 .addTemporalMarker(0, () -> {
                     //claw close
-                    claw1.setPosition(0.5);
-                    claw2.setPosition(0.5);
+
                 })
                 .strafeRight(23.5)
                 .lineTo(new Vector2d(11.75, 35.25))
@@ -150,15 +149,16 @@ public class BlueLeftAuto extends LinearOpMode {
                     //Arm raises
                     arm.Raise();
                 })
-                .waitSeconds(3)
+
                 //change forw/back val to appropriate distance based on tuning
-                .forward(3)
+
+                .waitSeconds(2)
                 .addDisplacementMarker(() -> {
                     //Claw Opens
                     claw1.setPosition(1);
                     claw2.setPosition(0);
                 })
-                .back(3)
+
                 .turn(Math.toRadians(-45))
                 .forward(10)
                 .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
@@ -182,12 +182,14 @@ public class BlueLeftAuto extends LinearOpMode {
         if (isStopRequested()) return;
 
 
+        claw1.setPosition(0.5);
+        claw2.setPosition(0.5);
+
         ParkingZone position = pipeline.getLastPosition();
 
 
         if (position == ParkingZone.ZONE1) {
-            claw1.setPosition(0.5);
-            claw2.setPosition(0.5);
+
             started = true;
             telemetry.addData("","Parking Zone 1");
             telemetry.update();
@@ -195,8 +197,7 @@ public class BlueLeftAuto extends LinearOpMode {
 
 
         } else if (position == ParkingZone.ZONE2) {
-            claw1.setPosition(0.5);
-            claw2.setPosition(0.5);
+
             started = true;
             telemetry.addData("","Parking Zone 2");
             telemetry.update();
@@ -204,8 +205,7 @@ public class BlueLeftAuto extends LinearOpMode {
 
 
         } else if (position == ParkingZone.ZONE3) {
-            claw1.setPosition(0.5);
-            claw2.setPosition(0.5);
+
             started = true;
             telemetry.addData("","Parking Zone 3");
             telemetry.update();

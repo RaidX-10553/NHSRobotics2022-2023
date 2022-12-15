@@ -11,7 +11,7 @@ public class Arm {
 
     }
     public void Raise() {
-        this.armMotor.setTargetPosition(1120);
+        this.armMotor.setTargetPosition(400);
         this.armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         this.armMotor.setVelocity(600);
     }
