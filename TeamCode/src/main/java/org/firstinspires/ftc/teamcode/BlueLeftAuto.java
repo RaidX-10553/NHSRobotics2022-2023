@@ -82,11 +82,7 @@ public class BlueLeftAuto extends LinearOpMode {
 
         //flipping
         TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
-                .addTemporalMarker(0, () -> {
-                    //claw close
-                    claw1.setPosition(0.5);
-                    claw2.setPosition(0.5);
-                })
+
                 .strafeRight(23.5)
                 .lineTo(new Vector2d(11.75, 35.25))
                 .turn(Math.toRadians(45))
@@ -190,6 +186,8 @@ public class BlueLeftAuto extends LinearOpMode {
 
 
         if (position == ParkingZone.ZONE1) {
+            claw1.setPosition(0.5);
+            claw2.setPosition(0.5);
             started = true;
             telemetry.addData("","Parking Zone 1");
             telemetry.update();
@@ -197,6 +195,8 @@ public class BlueLeftAuto extends LinearOpMode {
 
 
         } else if (position == ParkingZone.ZONE2) {
+            claw1.setPosition(0.5);
+            claw2.setPosition(0.5);
             started = true;
             telemetry.addData("","Parking Zone 2");
             telemetry.update();
@@ -204,6 +204,8 @@ public class BlueLeftAuto extends LinearOpMode {
 
 
         } else if (position == ParkingZone.ZONE3) {
+            claw1.setPosition(0.5);
+            claw2.setPosition(0.5);
             started = true;
             telemetry.addData("","Parking Zone 3");
             telemetry.update();
