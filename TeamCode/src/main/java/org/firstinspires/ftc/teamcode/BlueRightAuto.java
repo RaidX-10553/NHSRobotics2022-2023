@@ -2,30 +2,26 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-
-import org.firstinspires.ftc.teamcode.subsystems.ParkingZone;
-import org.firstinspires.ftc.teamcode.subsystems.MarkerDetection;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.MarkerDetection;
+import org.firstinspires.ftc.teamcode.subsystems.ParkingZone;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-
-import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-import org.firstinspires.ftc.teamcode.subsystems.Arm;
 
-
-@Autonomous(name="BlueLeftAuto", group="Autonomous")
-public class BlueLeftAuto extends LinearOpMode {
+@Autonomous(name="BlueRightAuto", group="Autonomous")
+public class BlueRightAuto extends LinearOpMode {
 
     /* Declare OpMode members. */
 
@@ -77,15 +73,15 @@ public class BlueLeftAuto extends LinearOpMode {
 
         armMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
-        Pose2d startPose = new Pose2d(35.25, 64, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-35.25, 64, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
 
         //flipping
         TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
                 .waitSeconds(2)
-                .strafeRight(23.5)
-                .lineTo(new Vector2d(11.75, 43))
-                .turn(Math.toRadians(38))
+                .strafeLeft(23.5)
+                .lineTo(new Vector2d(-11.75, 43))
+                .turn(Math.toRadians(-38))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
@@ -100,19 +96,19 @@ public class BlueLeftAuto extends LinearOpMode {
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(-38))
+                .turn(Math.toRadians(38))
                 .forward(12)
-                .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
-                .turn(Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
+                .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
-                .strafeRight(26.5)
+                .strafeRight(20.5)
                 .build();
 
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
                 .waitSeconds(2)
-                .strafeRight(23.5)
-                .lineTo(new Vector2d(11.75, 43))
-                .turn(Math.toRadians(38))
+                .strafeLeft(23.5)
+                .lineTo(new Vector2d(-11.75, 43))
+                .turn(Math.toRadians(-38))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
@@ -127,19 +123,19 @@ public class BlueLeftAuto extends LinearOpMode {
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(-38))
+                .turn(Math.toRadians(38))
                 .forward(12)
-                .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
-                .turn(Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
+                .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
-                .strafeRight(3)
+                .strafeLeft(3)
                 .build();
 
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
                 .waitSeconds(2)
-                .strafeRight(23.5)
-                .lineTo(new Vector2d(11.75, 43))
-                .turn(Math.toRadians(38))
+                .strafeLeft(23.5)
+                .lineTo(new Vector2d(-11.75, 43))
+                .turn(Math.toRadians(-38))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
@@ -154,12 +150,12 @@ public class BlueLeftAuto extends LinearOpMode {
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(-38))
+                .turn(Math.toRadians(38))
                 .forward(12)
-                .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
-                .turn(Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
+                .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
-                .strafeLeft(20.5)
+                .strafeLeft(26.5)
                 .build();
 
 
