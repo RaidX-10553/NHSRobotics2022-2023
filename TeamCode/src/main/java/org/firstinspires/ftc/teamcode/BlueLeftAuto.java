@@ -86,7 +86,7 @@ public class BlueLeftAuto extends LinearOpMode {
                 .strafeRight(23.5)
                 .lineTo(new Vector2d(11.75, 35.25))
                 .turn(Math.toRadians(45))
-                .addDisplacementMarker(() -> {
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Arm raises
                     arm.Raise();
                 })
@@ -108,33 +108,30 @@ public class BlueLeftAuto extends LinearOpMode {
                 .build();
 
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
-                .addTemporalMarker(0, () -> {
-                    //claw close
-
-                })
+                .waitSeconds(2)
                 .strafeRight(23.5)
-                .lineTo(new Vector2d(11.75, 35.25))
-                .turn(Math.toRadians(45))
+                .lineTo(new Vector2d(11.75, 43))
+                .turn(Math.toRadians(38))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
-
+                .waitSeconds(3)
+                .forward(12)
                 //change 1 to appropriate distance based on tuning
-
-
-                .addDisplacementMarker(() -> {
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
                     claw1.setPosition(1);
                     claw2.setPosition(0);
                 })
-
-                .turn(Math.toRadians(-45))
-                .forward(10)
+                .waitSeconds(1.5)
+                .back(12)
+                .turn(Math.toRadians(-38))
+                .forward(12)
                 .splineToSplineHeading(new Pose2d(35.25, 11.75, Math.toRadians(0)), Math.toRadians(0))
                 .turn(Math.toRadians(90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
-
+                .strafeRight(3)
                 .build();
 
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
@@ -145,7 +142,7 @@ public class BlueLeftAuto extends LinearOpMode {
                 .strafeRight(23.5)
                 .lineTo(new Vector2d(11.75, 35.25))
                 .turn(Math.toRadians(45))
-                .addDisplacementMarker(() -> {
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
@@ -170,7 +167,8 @@ public class BlueLeftAuto extends LinearOpMode {
 
 
 
-        /** Wait for the game to begin */
+        /** Wait for the ga
+         * me to begin */
         telemetry.addData(">", "Press Play to start Autonomous");
         telemetry.update();
 
