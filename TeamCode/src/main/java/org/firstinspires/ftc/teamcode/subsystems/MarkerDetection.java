@@ -69,16 +69,13 @@ public class MarkerDetection extends AprilTagDetectionPipeline {
                             
                             if (detection.id == firstTag) {
                                 position = ParkingZone.ZONE1;
-                                telemetry.addLine("Tag spotted: Zone1");
-                                telemetry.update();
+
                             } else if (detection.id == thirdTag) {
                                 position = ParkingZone.ZONE3;
-                                telemetry.addLine("Tag snapshot: Zone3");
-                                telemetry.update();
+
                             } else {
                                 position = ParkingZone.ZONE2;
-                                telemetry.addLine("Tag snapshot: Zone2");
-                                telemetry.update();
+
                             }
 
                             
