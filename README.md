@@ -1,4 +1,4 @@
-## NOTICE
+## NOTICE we hate anton
 This repository contains the code by team 10553 (RaidX), for the Power Play (2022-2023) competition season.
 
 ## Welcome!
