@@ -170,7 +170,7 @@ public class RedRightAuto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
 
         waitForStart();
-
+        webcam.stopStreaming();
         if (isStopRequested()) return;
 
 
