@@ -80,14 +80,14 @@ public class BlueRightAuto extends LinearOpMode {
         TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
                 .waitSeconds(2)
                 .strafeLeft(23.5)
-                .lineTo(new Vector2d(-11.75, 43))
-                .turn(Math.toRadians(-38))
+                .lineTo(new Vector2d(-11.75, 42))
+                .turn(Math.toRadians(-33))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
                 .waitSeconds(3)
-                .forward(12)
+                .forward(12)//was 12
                 //change 1 to appropriate distance based on tuning
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
@@ -96,7 +96,7 @@ public class BlueRightAuto extends LinearOpMode {
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(38))
+                .turn(Math.toRadians(33))
                 .forward(12)
                 .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
                 .turn(Math.toRadians(-90))
@@ -107,14 +107,14 @@ public class BlueRightAuto extends LinearOpMode {
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
                 .waitSeconds(2)
                 .strafeLeft(23.5)
-                .lineTo(new Vector2d(-11.75, 43))
-                .turn(Math.toRadians(-38))
+                .lineTo(new Vector2d(-11.75, 42))
+                .turn(Math.toRadians(-33))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
                 .waitSeconds(3)
-                .forward(12)
+                .forward(12)//was 12
                 //change 1 to appropriate distance based on tuning
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
@@ -123,7 +123,7 @@ public class BlueRightAuto extends LinearOpMode {
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(38))
+                .turn(Math.toRadians(33))
                 .forward(12)
                 .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
                 .turn(Math.toRadians(-90))
@@ -134,14 +134,14 @@ public class BlueRightAuto extends LinearOpMode {
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
                 .waitSeconds(2)
                 .strafeLeft(23.5)
-                .lineTo(new Vector2d(-11.75, 43))
-                .turn(Math.toRadians(-38))
+                .lineTo(new Vector2d(-11.75, 42))
+                .turn(Math.toRadians(-33))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
                 .waitSeconds(3)
-                .forward(12)
+                .forward(12)//was 12
                 //change 1 to appropriate distance based on tuning
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
@@ -150,12 +150,12 @@ public class BlueRightAuto extends LinearOpMode {
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(38))
+                .turn(Math.toRadians(33))
                 .forward(12)
                 .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
                 .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
-                .strafeLeft(26.5)
+                .strafeLeft(23.5)
                 .build();
 
 
