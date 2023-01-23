@@ -19,9 +19,10 @@ public class SlideBotV2 extends LinearOpMode {
     //Drive
     SampleMecanumDrive mecanumDrive;
 
+    boolean ButtonToggle = false;
 
 
-    private double driveValue = 1;
+    private double driveValue = 0.7;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -45,36 +46,36 @@ public class SlideBotV2 extends LinearOpMode {
             if (gamepad1.x) {
                 telemetry.addData("Mode", "PRECISE");
                 telemetry.update();
-                driveValue = 0.4;
+                driveValue = 0.5;
             }
 
             //Reversed Driving
             if (gamepad1.b) {
                 telemetry.addData("Mode", "REVERSED");
                 telemetry.update();
-                driveValue = -1;
+                driveValue = -0.7;
             }
 
             //Normal Driving
             if (gamepad1.a) {
                 telemetry.addData("Mode", "Normal");
                 telemetry.update();
-                driveValue = 1;
+                driveValue = 0.7;
             }
 
 
             //Drive Code Using RR
             mecanumDrive.setDrivePower(
                     new Pose2d(gamepad1.left_stick_y * driveValue,
-                            gamepad1.right_stick_x *driveValue,
-                            gamepad1.left_stick_x *driveValue));
+                            gamepad1.right_stick_x * driveValue,
+                            gamepad1.left_stick_x * driveValue));
             mecanumDrive.updatePoseEstimate();
 
 
 
             //Arm Control
             double x = -gamepad2.left_stick_y;
-            Arm.setPower(x);
+            Arm.setPower(x * 0.9);
 
 
             //Range is between [0.0 and 1.0] 0.5 being the center
@@ -87,6 +88,29 @@ public class SlideBotV2 extends LinearOpMode {
                claw1.setPosition(0);
 
             }
+
+
+
+            // Experimental claw toggle
+            if (gamepad2.a && !ButtonToggle) {
+                if (claw1.getPosition() == 0) {
+                    claw1.setPosition(0.5);
+                } else {
+                   claw1.setPosition(0);
+                }
+
+                ButtonToggle = true;
+
+            } else if (!gamepad1.a) {
+                ButtonToggle = false;
+            }
+
+
+
+
+
+            telemetry.addData("Pos", claw1.getPosition());
+            telemetry.update();
 
 
 
