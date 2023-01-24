@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 import org.firstinspires.ftc.teamY.drive.SampleMecanumDrive;
 
 @TeleOp(name = "Teleop SlideV2", group = "TeleOp")
@@ -19,8 +20,8 @@ public class SlideBotV2 extends LinearOpMode {
     //Drive
     SampleMecanumDrive mecanumDrive;
 
-    boolean ButtonToggle = false;
-
+    Gamepad currentGamepad2 = new Gamepad();
+    Gamepad previousGamepad2 = new Gamepad();
 
     private double driveValue = 0.7;
 
@@ -41,6 +42,16 @@ public class SlideBotV2 extends LinearOpMode {
 
         //Code is looped inside this while loop
         while (opModeIsActive()) {
+
+            //Try-Catch to prevent possible exception
+            try {
+             previousGamepad2.copy(currentGamepad2);
+             currentGamepad2.copy(gamepad2);
+            }
+            catch (RobotCoreException e) {
+             // Swallow the possible exception
+            }
+
 
            //Slow Driving
             if (gamepad1.x) {
@@ -91,18 +102,15 @@ public class SlideBotV2 extends LinearOpMode {
 
 
 
-            // Experimental claw toggle
-            if (gamepad2.a && !ButtonToggle) {
+            
+            //Experimental Claw Toggle
+            //Falling Edge Detector
+            if (!currentGamepad2.a && previousGamepad2.a) {
                 if (claw1.getPosition() == 0) {
                     claw1.setPosition(0.5);
                 } else {
                    claw1.setPosition(0);
                 }
-
-                ButtonToggle = true;
-
-            } else if (!gamepad1.a) {
-                ButtonToggle = false;
             }
 
 
