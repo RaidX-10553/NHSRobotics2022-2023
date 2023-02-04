@@ -81,26 +81,37 @@ public class BlueRightAuto extends LinearOpMode {
                 .waitSeconds(2)
                 .strafeLeft(23.5)
                 .lineTo(new Vector2d(-11.75, 42))
-                .turn(Math.toRadians(-33))
+                .turn(Math.toRadians(-32.5))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
                 .waitSeconds(3)
-                .forward(12)//was 12
+                .forward(9.5)//was 12
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    //Arm raises
+                    arm.Lower();
+                    telemetry.addData("Going Down","");
+                    telemetry.update();
+                })
+
                 //change 1 to appropriate distance based on tuning
+                .waitSeconds(4)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
                     claw1.setPosition(1);
                     claw2.setPosition(0);
+                    telemetry.addData("Opening ","");
+                    telemetry.update();
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(33))
+                .turn(Math.toRadians(30))//33
                 .forward(12)
                 .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
                 .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
+                .back(3)
                 .strafeRight(20.5)
                 .build();
 
@@ -108,26 +119,36 @@ public class BlueRightAuto extends LinearOpMode {
                 .waitSeconds(2)
                 .strafeLeft(23.5)
                 .lineTo(new Vector2d(-11.75, 42))
-                .turn(Math.toRadians(-33))
+                .turn(Math.toRadians(-32.5))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
                 .waitSeconds(3)
-                .forward(12)//was 12
+                .forward(9.5)//was 12
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    //Arm lowers
+                    arm.Lower();
+                    telemetry.addData("Going Down","");
+                    telemetry.update();
+                })
                 //change 1 to appropriate distance based on tuning
+                .waitSeconds(4)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
                     claw1.setPosition(1);
                     claw2.setPosition(0);
+                    telemetry.addData("Opening ","");
+                    telemetry.update();
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(33))
+                .turn(Math.toRadians(30))
                 .forward(12)
                 .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
                 .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
+                .back(3)
                 .strafeLeft(3)
                 .build();
 
@@ -135,26 +156,36 @@ public class BlueRightAuto extends LinearOpMode {
                 .waitSeconds(2)
                 .strafeLeft(23.5)
                 .lineTo(new Vector2d(-11.75, 42))
-                .turn(Math.toRadians(-33))
+                .turn(Math.toRadians(-32.5))
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     //Arm raises
                     arm.Raise();
                 })
                 .waitSeconds(3)
-                .forward(12)//was 12
+                .forward(9.5)//was 12
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    //Arm lowers
+                    arm.Lower();
+                    telemetry.addData("Going Down","");
+                    telemetry.update();
+                })
                 //change 1 to appropriate distance based on tuning
+                .waitSeconds(4)
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> {
                     //Claw Opens
                     claw1.setPosition(1);
                     claw2.setPosition(0);
+                    telemetry.addData("Opening ","");
+                    telemetry.update();
                 })
                 .waitSeconds(1.5)
                 .back(12)
-                .turn(Math.toRadians(33))
+                .turn(Math.toRadians(30))
                 .forward(12)
                 .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
                 .turn(Math.toRadians(-90))
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
+                .back(3)
                 .strafeLeft(23.5)
                 .build();
 

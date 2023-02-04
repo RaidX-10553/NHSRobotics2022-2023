@@ -4,8 +4,12 @@ package org.firstinspires.ftc.teamY;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.exception.RobotCoreException;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 
 import org.firstinspires.ftc.teamY.drive.SampleMecanumDrive;
@@ -14,7 +18,7 @@ import org.firstinspires.ftc.teamY.drive.SampleMecanumDrive;
 public class SlideBotV2 extends LinearOpMode {
     //Claw
     Servo claw1;
-
+    TouchSensor sensor;
     DcMotorEx Arm;
 
     //Drive
@@ -23,7 +27,7 @@ public class SlideBotV2 extends LinearOpMode {
     Gamepad currentGamepad2 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
 
-    private double driveValue = 0.7;
+    private double driveValue = 0.8;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -33,10 +37,12 @@ public class SlideBotV2 extends LinearOpMode {
         //Claw
         claw1 = hardwareMap.get(Servo.class, "claw1");
 
+        sensor = hardwareMap.get(TouchSensor.class, "Toucher");
+
 
         Arm = hardwareMap.get(DcMotorEx.class, "arm");
 
-
+        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         waitForStart();
 
 
@@ -47,10 +53,14 @@ public class SlideBotV2 extends LinearOpMode {
             try {
              previousGamepad2.copy(currentGamepad2);
              currentGamepad2.copy(gamepad2);
+
+             throw new RobotCoreException("you are a failure");
             }
             catch (RobotCoreException e) {
              // Swallow the possible exception
             }
+
+
 
 
            //Slow Driving
@@ -64,14 +74,14 @@ public class SlideBotV2 extends LinearOpMode {
             if (gamepad1.b) {
                 telemetry.addData("Mode", "REVERSED");
                 telemetry.update();
-                driveValue = -0.7;
+                driveValue = -0.8;
             }
 
             //Normal Driving
             if (gamepad1.a) {
                 telemetry.addData("Mode", "Normal");
                 telemetry.update();
-                driveValue = 0.7;
+                driveValue = 0.8;
             }
 
 
@@ -85,8 +95,8 @@ public class SlideBotV2 extends LinearOpMode {
 
 
             //Arm Control
-            double x = -gamepad2.left_stick_y;
-            Arm.setPower(x * 0.9);
+            double x = gamepad2.left_stick_y;
+            Arm.setPower(x);
 
 
             //Range is between [0.0 and 1.0] 0.5 being the center
@@ -116,8 +126,16 @@ public class SlideBotV2 extends LinearOpMode {
 
 
 
+            
+
+
+
+
+
 
             telemetry.addData("Pos", claw1.getPosition());
+            telemetry.addData("Anton","is a gay ass nig");
+            telemetry.addData("Arm extension/test sensor", Arm.getCurrentPosition());
             telemetry.update();
 
 

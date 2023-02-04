@@ -11,7 +11,7 @@ public class Arm {
 
     }
     public void Raise() {
-        this.armMotor.setTargetPosition(520);
+        this.armMotor.setTargetPosition(601);
         this.armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         this.armMotor.setVelocity(600);
     }
@@ -19,6 +19,7 @@ public class Arm {
         this.armMotor.setTargetPosition(-armMotor.getCurrentPosition());
         this.armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         this.armMotor.setVelocity(600);
+        //og was 600
         this.armMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
     }
