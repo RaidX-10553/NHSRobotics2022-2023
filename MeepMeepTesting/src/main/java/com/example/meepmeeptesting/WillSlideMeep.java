@@ -13,33 +13,17 @@ public class WillSlideMeep {
 
         RoadRunnerBotEntity blueRight = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(52.48291908330528, 52.48291908330528, Math.toRadians(180), Math.toRadians(180), 11)
+                .setConstraints(55, 52.48291908330528, Math.toRadians(180), Math.toRadians(180), 11)
                 .setColorScheme(new ColorSchemeBlueDark())
                 .setDimensions(12, 12)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-35.25, 64, Math.toRadians(270)))
-                                .addTemporalMarker(0, () -> {
-                                    //claw close
-                                })
                                 .strafeLeft(23.5)
-                                .lineTo(new Vector2d(-11.75, 35.25))
-                                .turn(Math.toRadians(-45))
-                                .addDisplacementMarker(() -> {
-                                    //Arm raises
-                                })
-                                .waitSeconds(3)
+                                .forward(50)
+                                //less
                                 //change 1 to appropriate distance based on tuning
-                                .forward(1)
-                                .addDisplacementMarker(() -> {
-                                    //Claw Opens
-                                })
-                                .back(1)
-                                .turn(Math.toRadians(45))
-                                .forward(10)
-                                .splineToSplineHeading(new Pose2d(-35.25, 11.75, Math.toRadians(180)), Math.toRadians(180))
-                                .turn(Math.toRadians(-90))
-                                //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
-                                .strafeLeft(23.5)
+                                .turn(Math.toRadians(-43))
+                                .forward(8)
                                 .build()
                 );
 

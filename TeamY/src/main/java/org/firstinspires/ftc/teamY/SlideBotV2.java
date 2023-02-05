@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamY.drive.SampleMecanumDrive;
 
 @TeleOp(name = "Teleop SlideV2", group = "TeleOp")
@@ -43,6 +44,8 @@ public class SlideBotV2 extends LinearOpMode {
         Arm = hardwareMap.get(DcMotorEx.class, "arm");
 
         Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Arm.setTargetPosition(0);
+
         waitForStart();
 
 
@@ -87,9 +90,9 @@ public class SlideBotV2 extends LinearOpMode {
 
             //Drive Code Using RR
             mecanumDrive.setDrivePower(
-                    new Pose2d(gamepad1.left_stick_y * driveValue,
-                            gamepad1.right_stick_x * driveValue,
-                            gamepad1.left_stick_x * driveValue));
+                    new Pose2d(-gamepad1.left_stick_y * driveValue,
+                            -gamepad1.right_stick_x * driveValue,
+                            -gamepad1.left_stick_x * driveValue));
             mecanumDrive.updatePoseEstimate();
 
 
@@ -110,6 +113,11 @@ public class SlideBotV2 extends LinearOpMode {
 
             }
 
+            if (sensor.isPressed()) {
+                Arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                telemetry.addData("B","k");
+                telemetry.update();
+            }
 
 
             
@@ -126,6 +134,8 @@ public class SlideBotV2 extends LinearOpMode {
 
 
 
+
+
             
 
 
@@ -134,7 +144,6 @@ public class SlideBotV2 extends LinearOpMode {
 
 
             telemetry.addData("Pos", claw1.getPosition());
-            telemetry.addData("Anton","is a gay ass nig");
             telemetry.addData("Arm extension/test sensor", Arm.getCurrentPosition());
             telemetry.update();
 
