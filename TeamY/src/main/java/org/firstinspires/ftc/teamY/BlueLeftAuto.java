@@ -1,4 +1,4 @@
-//USE THIS ONE, THIS ONE IS GOOD
+
 package org.firstinspires.ftc.teamY;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -12,17 +12,16 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamY.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamY.subsystems.Arm;
 import org.firstinspires.ftc.teamY.subsystems.MarkerDetection;
-import org.firstinspires.ftc.teamY.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamY.subsystems.ParkingZone;
+import org.firstinspires.ftc.teamY.trajectorysequence.TrajectorySequence;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
 
-
-@Autonomous(name="BlueRightAuto", group="Autonomous")
-public class BlueRightAuto extends LinearOpMode {
+@Autonomous(name="BlueLeftAuto", group="Autonomous")
+public class BlueLeftAuto extends LinearOpMode {
 
     /* Declare OpMode members. */
 
@@ -91,11 +90,11 @@ public class BlueRightAuto extends LinearOpMode {
         //flipping
         TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
                 /*
-                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                   claw.setPosition(1);
-                })
+                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    claw.setPosition(1);
+                 })
 
-                 */
+                  */
                 .waitSeconds(0.5)
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
@@ -103,12 +102,13 @@ public class BlueRightAuto extends LinearOpMode {
                 })
 
                  */
-                .strafeLeft(23.5)
+                .forward(4)
+                .strafeRight(23.5)
                 .forward(50)
                 //less
                 //change 1 to appropriate distance based on tuning
-                .turn(Math.toRadians(-42))
-                .forward(8.7)
+                .turn(Math.toRadians(42))//-42
+                .forward(10)//og8.7
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.SlightLower();
@@ -124,10 +124,10 @@ public class BlueRightAuto extends LinearOpMode {
 
                  */
                 .waitSeconds(2)
-                .back(8)
-                .turn(Math.toRadians(-48))
+                .back(12)
+                .turn(Math.toRadians(48))//-48
                 //.strafeRight(2)
-                .forward(46.3)
+                .forward(49.3)
                 /*
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
@@ -138,9 +138,9 @@ public class BlueRightAuto extends LinearOpMode {
                  */
                 .waitSeconds(1)
                 .back(10)
-                .turn(Math.toRadians(90))
-                .strafeLeft(29)
-                .forward(3)
+                .turn(Math.toRadians(-90))//90
+                .strafeRight(29)//left
+                .forward(7)//og 3
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(1);
@@ -151,16 +151,17 @@ public class BlueRightAuto extends LinearOpMode {
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
                 .waitSeconds(2)
                 .back(5)
-                .strafeLeft(8)
+                .strafeLeft(36)//left
                 .build();
+
 
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
                 /*
-                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                   claw.setPosition(1);
-                })
+                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    claw.setPosition(1);
+                 })
 
-                 */
+                  */
                 .waitSeconds(0.5)
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
@@ -168,12 +169,13 @@ public class BlueRightAuto extends LinearOpMode {
                 })
 
                  */
-                .strafeLeft(23.5)
+                .forward(4)
+                .strafeRight(23.5)
                 .forward(50)
                 //less
                 //change 1 to appropriate distance based on tuning
-                .turn(Math.toRadians(-42))
-                .forward(8.7)
+                .turn(Math.toRadians(42))//-42
+                .forward(10)//og8.7
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.SlightLower();
@@ -189,10 +191,10 @@ public class BlueRightAuto extends LinearOpMode {
 
                  */
                 .waitSeconds(2)
-                .back(8)
-                .turn(Math.toRadians(-48))
+                .back(12)
+                .turn(Math.toRadians(48))//-48
                 //.strafeRight(2)
-                .forward(46.3)
+                .forward(49.3)
                 /*
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
@@ -203,9 +205,9 @@ public class BlueRightAuto extends LinearOpMode {
                  */
                 .waitSeconds(1)
                 .back(10)
-                .turn(Math.toRadians(90))
-                .strafeLeft(29)
-                .forward(3)
+                .turn(Math.toRadians(-90))//90
+                .strafeRight(29)//left
+                .forward(7)//og 3
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(1);
@@ -216,16 +218,17 @@ public class BlueRightAuto extends LinearOpMode {
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
                 .waitSeconds(2)
                 .back(5)
-                .strafeRight(8)
+                .strafeLeft(12)//12
                 .build();
+
 
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
                 /*
-               .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                  claw.setPosition(1);
-               })
+                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    claw.setPosition(1);
+                 })
 
-                */
+                  */
                 .waitSeconds(0.5)
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
@@ -233,12 +236,13 @@ public class BlueRightAuto extends LinearOpMode {
                 })
 
                  */
-                .strafeLeft(23.5)
+                .forward(4)
+                .strafeRight(23.5)
                 .forward(50)
                 //less
                 //change 1 to appropriate distance based on tuning
-                .turn(Math.toRadians(-42))
-                .forward(8.7)
+                .turn(Math.toRadians(42))//-42
+                .forward(10)//og8.7
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.SlightLower();
@@ -254,10 +258,10 @@ public class BlueRightAuto extends LinearOpMode {
 
                  */
                 .waitSeconds(2)
-                .back(8)
-                .turn(Math.toRadians(-48))
+                .back(12)
+                .turn(Math.toRadians(48))//-48
                 //.strafeRight(2)
-                .forward(46.3)
+                .forward(49.3)
                 /*
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
@@ -268,9 +272,9 @@ public class BlueRightAuto extends LinearOpMode {
                  */
                 .waitSeconds(1)
                 .back(10)
-                .turn(Math.toRadians(90))
-                .strafeLeft(29)
-                .forward(3)
+                .turn(Math.toRadians(-90))//90
+                .strafeRight(29)//left
+                .forward(7)//og 3
                 /*
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(1);
@@ -281,9 +285,9 @@ public class BlueRightAuto extends LinearOpMode {
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
                 .waitSeconds(2)
                 .back(5)
-                .strafeRight(33)
-
+                .strafeRight(12)
                 .build();
+
 
 
 

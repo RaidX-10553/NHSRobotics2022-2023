@@ -44,7 +44,7 @@ public class Arm {
     public void Lower() {
         this.armMotor.setTargetPosition(-armMotor.getCurrentPosition());
         this.armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
-        this.armMotor.setVelocity(600);
+        this.armMotor.setVelocity(1800);
         //og was 600
     }
 }
