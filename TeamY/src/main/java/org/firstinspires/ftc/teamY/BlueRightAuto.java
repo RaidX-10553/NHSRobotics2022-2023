@@ -90,198 +90,200 @@ public class BlueRightAuto extends LinearOpMode {
 
         //flipping
         TrajectorySequence location1 = drive.trajectorySequenceBuilder(startPose)
-                /*
+
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                   claw.setPosition(1);
+                    claw.setPosition(1);
                 })
 
-                 */
+
                 .waitSeconds(0.5)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.High();
                 })
 
-                 */
+
                 .strafeLeft(23.5)
                 .forward(50)
                 //less
                 //change 1 to appropriate distance based on tuning
                 .turn(Math.toRadians(-42))
-                .forward(8.7)
-                /*
+                .forward(9.6)
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.SlightLower();
                 })
 
-                 */
+
                 .waitSeconds(1.5)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(0);
                     arm.Five();
                 })
 
-                 */
+
                 .waitSeconds(2)
                 .back(8)
                 .turn(Math.toRadians(-48))
-                //.strafeRight(2)
-                .forward(46.3)
-                /*
+                .strafeLeft(1)
+                .forward(47.5)
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(1);
                     arm.High();
                 })
 
-                 */
+
                 .waitSeconds(1)
                 .back(10)
                 .turn(Math.toRadians(90))
                 .strafeLeft(29)
                 .forward(3)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                    claw.setPosition(1);
+                    claw.setPosition(0);
                     arm.SlightLower();
                 })
 
-                 */
+
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
                 .waitSeconds(2)
                 .back(5)
-                .strafeLeft(8)
+                .strafeLeft(14)
+
                 .build();
 
         TrajectorySequence location2 = drive.trajectorySequenceBuilder(startPose)
-                /*
+
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                   claw.setPosition(1);
+                    claw.setPosition(1);
                 })
 
-                 */
+
                 .waitSeconds(0.5)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.High();
                 })
 
-                 */
+
                 .strafeLeft(23.5)
                 .forward(50)
                 //less
                 //change 1 to appropriate distance based on tuning
                 .turn(Math.toRadians(-42))
-                .forward(8.7)
-                /*
+                .forward(9.6)
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.SlightLower();
                 })
 
-                 */
+
                 .waitSeconds(1.5)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(0);
                     arm.Five();
                 })
 
-                 */
+
                 .waitSeconds(2)
                 .back(8)
                 .turn(Math.toRadians(-48))
-                //.strafeRight(2)
-                .forward(46.3)
-                /*
+                .strafeLeft(1)
+                .forward(47.5)
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(1);
                     arm.High();
                 })
 
-                 */
+
                 .waitSeconds(1)
                 .back(10)
                 .turn(Math.toRadians(90))
                 .strafeLeft(29)
                 .forward(3)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                    claw.setPosition(1);
+                    claw.setPosition(0);
                     arm.SlightLower();
                 })
 
-                 */
+
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
                 .waitSeconds(2)
                 .back(5)
-                .strafeRight(8)
+                .strafeRight(12)
+
                 .build();
 
         TrajectorySequence location3 = drive.trajectorySequenceBuilder(startPose)
-                /*
-               .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                  claw.setPosition(1);
-               })
 
-                */
+
+                .UNSTABLE_addTemporalMarkerOffset(0,() -> {
+                    claw.setPosition(1);
+                })
+
+
                 .waitSeconds(0.5)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.High();
                 })
 
-                 */
+
                 .strafeLeft(23.5)
                 .forward(50)
                 //less
                 //change 1 to appropriate distance based on tuning
                 .turn(Math.toRadians(-42))
-                .forward(8.7)
-                /*
+                .forward(9.6)
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     arm.SlightLower();
                 })
 
-                 */
+
                 .waitSeconds(1.5)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(0);
                     arm.Five();
                 })
 
-                 */
+
                 .waitSeconds(2)
                 .back(8)
                 .turn(Math.toRadians(-48))
-                //.strafeRight(2)
-                .forward(46.3)
-                /*
+                .strafeLeft(1)
+                .forward(47.5)
 
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
                     claw.setPosition(1);
                     arm.High();
                 })
 
-                 */
+
                 .waitSeconds(1)
                 .back(10)
                 .turn(Math.toRadians(90))
                 .strafeLeft(29)
                 .forward(3)
-                /*
+
                 .UNSTABLE_addTemporalMarkerOffset(0,() -> {
-                    claw.setPosition(1);
+                    claw.setPosition(0);
                     arm.SlightLower();
                 })
 
-                 */
+
                 //CHANGE TO LEFT OR RIGHT BASED ON DETECTION OR DONT STRAFE AT ALL
                 .waitSeconds(2)
                 .back(5)
-                .strafeRight(33)
+                .strafeRight(40)
 
                 .build();
 
@@ -316,7 +318,7 @@ public class BlueRightAuto extends LinearOpMode {
             started = true;
             telemetry.addData("","Parking Zone 2");
             telemetry.update();
-            arm.Five();
+            drive.followTrajectorySequence(location2);
 
         } else if (position == ParkingZone.ZONE3) {
             started = true;
